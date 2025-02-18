@@ -1,0 +1,10 @@
+@import url(./assets/normalize.css);
+@import url(./assets/fonts/fonts.css);
+
+:root {
+  font-family: Muller;
+}
+
+body {
+  margin: 0;
+}
