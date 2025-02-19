@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { TaskProps } from '../../../state/cardTasks/types'
+import { formatDate } from '../../../hooks/formatDate'
 
 const StyledCardDiv = styled.div`
   width: 100%;
@@ -32,25 +34,25 @@ const StyledCardTextContainer = styled.div`
   margin: 0;
 `
 
-const StyledConfirmButton = styled.button<{ stateTask: boolean }>`
+const StyledConfirmButton = styled.button<{ $confirmed: boolean }>`
   width: 20px;
   min-width: 20px;
   height: 20px;
   min-height: 20px;
   border-radius: 50%;
-  border: 2px solid ${(props) => (props.stateTask ? '#a4a4a4' : '#6AD400')};
-  background-color: ${(props) => (props.stateTask ? '#FFF' : '#6AD400')};
+  border: 2px solid ${(props) => (props.$confirmed ? '#6AD400' : '#a4a4a4')};
+  background-color: ${(props) => (props.$confirmed ? '#6AD400' : '#FFF')};
   cursor: pointer;
 `
 
-const StyledTextP = styled.p<{ stateTask: boolean }>`
+const StyledTextP = styled.p<{ $confirmed: boolean }>`
   font-size: 16px;
   line-height: 1;
   color: #30324b;
   border: none;
   outline: none;
   width: 100%;
-  text-decoration: ${(props) => (props.stateTask ? 'none' : 'line-through')};
+  text-decoration: ${(props) => (props.$confirmed ? 'line-through' : 'none')};
 `
 
 const StyledButton = styled.button<{ type: string }>`
@@ -86,23 +88,23 @@ const StyledContainerButtons = styled.div`
   gap: 12px;
 `
 
-export const CardTask: React.FC = () => {
-  const [stateTask, setStateTask] = React.useState(true)
+export const CardTask: React.FC<TaskProps> = ({ id, text, confirmed, date, changeStatusTask, deleteTask }) => {
+
   return (
     <StyledCardDiv>
-      <StyledCardDateP>Сегодня</StyledCardDateP>
+      <StyledCardDateP>{formatDate(date)}</StyledCardDateP>
       <StyledCardTextContainer>
         <StyledConfirmButton
           onClick={() => {
-            setStateTask(!stateTask)
+            changeStatusTask(id)
           }}
-          stateTask={stateTask}
+          $confirmed={confirmed}
         />
-        <StyledTextP stateTask={stateTask}>{'Завершить проект по настройке Vite для темы WordPress.'}</StyledTextP>
+        <StyledTextP $confirmed={confirmed}>{text}</StyledTextP>
       </StyledCardTextContainer>
       <StyledContainerButtons>
         <StyledButton type='edit' />
-        <StyledButton type='delete' />
+        <StyledButton onClick={() => deleteTask(id)} type='delete' />
       </StyledContainerButtons>
     </StyledCardDiv>
   )

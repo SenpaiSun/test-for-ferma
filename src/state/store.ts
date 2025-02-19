@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { tasksReducer } from './cardTasks/tasks-slice'
+import { inputReducer } from './input/input-slice'
 
 
 export const store = configureStore({
   reducer: {
-    cardTasks: tasksReducer
+    tasks: tasksReducer,
+    input: inputReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 })

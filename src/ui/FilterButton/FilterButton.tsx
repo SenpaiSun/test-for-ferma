@@ -26,7 +26,6 @@ const StyledButton = styled.button<{ $textColorHover: string, $color: string, $b
 `
 
 export const FilterButton: React.FC<FilterProps> = ({ idButton, textButton, textColorHover, colorButton, backgroundHover, borderFocus}) => {
-  console.log(idButton)
   return (
     <StyledButton $textColorHover={textColorHover} $color={colorButton} $backgroundHover={backgroundHover} $borderFocus={borderFocus}>
       {textButton}

@@ -7,4 +7,6 @@ export interface TaskProps {
   text: string
   confirmed: boolean
   date: string
+  changeStatusTask: (id: number) => void
+  deleteTask: (id: number) => void
 }

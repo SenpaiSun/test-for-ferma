@@ -2,6 +2,7 @@ import React from 'react'
 import { Input } from '../../ui/Input/Input'
 import styled from 'styled-components'
 import { InputButton } from '../../ui/InputButton/InputButton'
+import { InputTaskProps } from './types'
 
 const StyledDiv = styled.div`
   width: 100%;
@@ -17,11 +18,11 @@ const StyledDiv = styled.div`
   box-sizing: border-box;
 `
 
-export const InputTask: React.FC = () => {
+export const InputTask: React.FC<InputTaskProps> = ({value, changeValue, addTask}) => {
   return (
     <StyledDiv>
-      <Input />
-      <InputButton />
+      <Input value={value} changeValue={changeValue}/>
+      {value && <InputButton addTask={addTask} value={value}/>}
     </StyledDiv>
   )
 }

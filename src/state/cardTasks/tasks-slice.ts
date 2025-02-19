@@ -13,7 +13,12 @@ export const tasksSlice = createSlice({
       state.tasks = action.payload;
     },
     addTask: (state, action) => {
-      state.tasks.push(action.payload);
+      state.tasks.push({
+        id: Number(`${Date.now()}${Math.floor(Math.random() * 1000)}`),
+        text: action.payload,
+        confirmed: false,
+        date: new Date().toLocaleDateString(),
+      });
     },
     deleteTask: (state, action) => {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);

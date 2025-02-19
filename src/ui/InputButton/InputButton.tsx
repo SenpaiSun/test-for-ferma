@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { InputButtonProps } from './types'
 
 const StyledButton = styled.button`
   width: 60px;
@@ -15,6 +16,9 @@ const StyledButton = styled.button`
   background-size: 50%;
 `
 
-export const InputButton: React.FC = () => {
-  return <StyledButton></StyledButton>
+export const InputButton: React.FC<InputButtonProps> = ({addTask, value}) => {
+  const addTaskHandler = () => {
+    addTask(value)
+  }
+  return <StyledButton onClick={addTaskHandler}></StyledButton>
 }

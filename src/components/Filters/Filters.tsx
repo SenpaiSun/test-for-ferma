@@ -1,5 +1,5 @@
 import React from 'react'
-import { FilterButton } from '../../../ui/FilterButton/FilterButton'
+import { FilterButton } from '../../ui/FilterButton/FilterButton'
 import styled from 'styled-components'
 
 const allFilters = [

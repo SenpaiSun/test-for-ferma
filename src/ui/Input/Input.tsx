@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import { InputProps } from './types';
 
 const StyledInput = styled.input`
   border: none;
@@ -8,11 +8,13 @@ const StyledInput = styled.input`
   font-size: 24px;
   width: 100%;
   height: 100%;
+  min-height: 50px;
 `
 
-export const Input: React.FC = () => {
+export const Input: React.FC<InputProps> = ({value, changeValue}) => {
+
   return (
-    <StyledInput placeholder={'Введите название задачи'}>
+    <StyledInput placeholder={'Введите название задачи'} value={value} onChange={e => changeValue(e.target.value)}>
     </StyledInput>
   );
 };
