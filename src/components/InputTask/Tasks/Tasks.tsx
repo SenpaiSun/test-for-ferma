@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardTask } from '../../../ui/CardTask/CardTask'
+import { CardTask } from './CardTask/CardTask'
 import styled from 'styled-components'
 
 const StyledTaskDiv = styled.div`

@@ -21,7 +21,7 @@ export const Filters: React.FC = () => {
   return (
     <StyledContainerFilters>
       {allFilters.map((filter) => (
-        <FilterButton key={filter.id} idButton={filter.id} text={filter.text} textColorHover={filter.textColorHover} color={filter.color} backgroundHover={filter.backgroundHover} borderFocus={filter.borderFocus} />
+        <FilterButton key={filter.id} idButton={filter.id} textButton={filter.text} textColorHover={filter.textColorHover} colorButton={filter.color} backgroundHover={filter.backgroundHover} borderFocus={filter.borderFocus} />
       ))}
     </StyledContainerFilters>
   )
