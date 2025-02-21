@@ -23,6 +23,10 @@ const StyledButton = styled.button<{ $textColorHover: string, $color: string, $b
   &:focus {
     border-color: ${(props) => props.$borderFocus};
   }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `
 
 export const FilterButton: React.FC<FilterProps> = ({ filters, textButton, textColorHover, colorButton, backgroundHover, borderFocus, changeFilter, state}) => {

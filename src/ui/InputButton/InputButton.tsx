@@ -14,6 +14,11 @@ const StyledButton = styled.button`
   background-position: center;
   background-repeat: no-repeat;
   background-size: 50%;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 39px;
+    height: 32px;
 `
 
 export const InputButton: React.FC<InputButtonProps> = ({addTask, value, changeValue}) => {

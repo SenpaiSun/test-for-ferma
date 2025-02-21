@@ -16,6 +16,11 @@ const StyledDiv = styled.div`
   border-radius: 21px;
   box-shadow: 0px 4px 17.8px 0px #0000001a;
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 `
 
 export const InputTask: React.FC<InputTaskProps> = ({value, changeValue, addTask}) => {

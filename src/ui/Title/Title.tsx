@@ -9,6 +9,10 @@ const StyledTitle = styled.h1`
   color: #30324b;
   margin: 0;
   margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `
 
 export const Title: React.FC<TitleProps> = ({ text }) => {

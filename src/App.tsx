@@ -13,6 +13,9 @@ const StyledMain = styled.main`
   align-items: center;
   justify-content: center;
   margin: 100px;
+  @media (max-width: 768px) {
+    margin: 30px 16px;
+  }
 `
 const StyledContainerDiv = styled.div`
   width: 100%;

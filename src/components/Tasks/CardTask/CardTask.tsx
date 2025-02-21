@@ -53,7 +53,11 @@ const StyledTextP = styled.p<{ $confirmed: boolean }>`
   border: none;
   outline: none;
   width: 100%;
+  max-width: 90%;
   text-decoration: ${(props) => (props.$confirmed ? 'line-through' : 'none')};
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 `
 
 const StyledButton = styled.button<{ type: string }>`
