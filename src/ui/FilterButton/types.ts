@@ -7,4 +7,7 @@ export interface FilterProps extends DetailedHTMLProps<HTMLAttributes<HTMLButton
   borderFocus: string
   idButton?: number
   textButton?: string
+  state: 'All' | 'Completed' | 'Uncompleted'
+  changeFilter: (state: 'All' | 'Completed' | 'Uncompleted') => void
+  filters: 'All' | 'Completed' | 'Uncompleted'
 }

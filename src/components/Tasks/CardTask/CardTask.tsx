@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { TaskProps } from '../../../state/cardTasks/types'
 import { formatDate } from '../../../hooks/formatDate'
+import { CardTaskProps } from './types'
 
 const StyledCardDiv = styled.div`
   width: 100%;
@@ -48,6 +48,7 @@ const StyledConfirmButton = styled.button<{ $confirmed: boolean }>`
 const StyledTextP = styled.p<{ $confirmed: boolean }>`
   font-size: 16px;
   line-height: 1;
+  margin: 0;
   color: #30324b;
   border: none;
   outline: none;
@@ -88,7 +89,37 @@ const StyledContainerButtons = styled.div`
   gap: 12px;
 `
 
-export const CardTask: React.FC<TaskProps> = ({ id, text, confirmed, date, changeStatusTask, deleteTask }) => {
+const StyledInput = styled.input`
+  max-width: 80%;
+  border: none;
+  border-bottom: 1px solid #a4a4a4;
+  outline: none;
+  font-size: 16px;
+  line-height: 1;
+  color: #30324b;
+`
+const StyledButtonConfirm = styled.button`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  color: #0013ff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    color:#575A84;
+  }
+`
+
+export const CardTask: React.FC<CardTaskProps> = ({ id, text, confirmed, date, changeStatusTask, deleteTask, changeTextTask }) => {
+  const [isEdit, setIsEdit] = React.useState(false)
+  const [valueTextTask, setValueTextTask] = React.useState(text)
+
+  const saveTextTask = () => {
+    setIsEdit((prev) => !prev)
+    changeTextTask({id, valueTextTask})
+  }
 
   return (
     <StyledCardDiv>
@@ -100,10 +131,11 @@ export const CardTask: React.FC<TaskProps> = ({ id, text, confirmed, date, chang
           }}
           $confirmed={confirmed}
         />
-        <StyledTextP $confirmed={confirmed}>{text}</StyledTextP>
+        {isEdit ? <StyledInput size={valueTextTask.length} onChange={(e) => setValueTextTask(e.target.value)} value={valueTextTask} /> : <StyledTextP $confirmed={confirmed}>{text}</StyledTextP>}
       </StyledCardTextContainer>
       <StyledContainerButtons>
-        <StyledButton type='edit' />
+        {isEdit && <StyledButtonConfirm onClick={() => saveTextTask()}>Сохранить</StyledButtonConfirm>}
+        <StyledButton type='edit' onClick={() => setIsEdit((prev) => !prev)} />
         <StyledButton onClick={() => deleteTask(id)} type='delete' />
       </StyledContainerButtons>
     </StyledCardDiv>

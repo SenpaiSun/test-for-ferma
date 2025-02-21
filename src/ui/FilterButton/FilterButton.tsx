@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { FilterProps } from './types'
 
-const StyledButton = styled.button<{ $textColorHover: string, $color: string, $backgroundHover: string, $borderFocus: string}>`
+const StyledButton = styled.button<{ $textColorHover: string, $color: string, $backgroundHover: string, $borderFocus: string, $background: string, $borderColor: string}>`
   height: 36px;
   widht: max-content;
   border-radius: 10px;
-  border: 2px solid ${(props) => props.$color};
+  border: 2px solid ${(props) => props.$borderColor};
   color: ${(props) => props.$color};
-  background: #fff;
+  background: ${(props) => props.$background};
   font-weight: 400;
   font-size: 16px;
   line-height: 1;
@@ -25,9 +25,9 @@ const StyledButton = styled.button<{ $textColorHover: string, $color: string, $b
   }
 `
 
-export const FilterButton: React.FC<FilterProps> = ({ idButton, textButton, textColorHover, colorButton, backgroundHover, borderFocus}) => {
+export const FilterButton: React.FC<FilterProps> = ({ filters, textButton, textColorHover, colorButton, backgroundHover, borderFocus, changeFilter, state}) => {
   return (
-    <StyledButton $textColorHover={textColorHover} $color={colorButton} $backgroundHover={backgroundHover} $borderFocus={borderFocus}>
+    <StyledButton onClick={() => changeFilter(state)} $textColorHover={textColorHover} $background={filters === state ? colorButton : '#fff'} $color={filters === state ? '#fff' : colorButton} $backgroundHover={backgroundHover} $borderFocus={borderFocus} $borderColor={colorButton}>
       {textButton}
     </StyledButton>
   )

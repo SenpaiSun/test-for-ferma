@@ -22,7 +22,7 @@ export const InputTask: React.FC<InputTaskProps> = ({value, changeValue, addTask
   return (
     <StyledDiv>
       <Input value={value} changeValue={changeValue}/>
-      {value && <InputButton addTask={addTask} value={value}/>}
+      {value && <InputButton changeValue={changeValue} addTask={addTask} value={value}/>}
     </StyledDiv>
   )
 }

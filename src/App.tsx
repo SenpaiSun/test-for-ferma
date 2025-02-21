@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Title } from './ui/Title/Title'
 import { InputTask } from './components/InputTask/InputTask'
@@ -26,15 +26,24 @@ const StyledContainerDiv = styled.div`
 const App: React.FC = () => {
   const tasks = useAppSelector((state) => state.tasks.tasks)
   const inputValue = useAppSelector((state) => state.input.value)
-  const { allTasks, addTask, deleteTask, changeStatusTask, changeValue } = useActions()
-  console.log(tasks, inputValue)
+  const filters = useAppSelector((state) => state.filter.filter)
+  const { allTasks, addTask, deleteTask, changeStatusTask, changeValue, changeFilter, changeTextTask } = useActions()
+  const tasksLocalStorage = localStorage.getItem('tasks')
+
+  useEffect(() => {
+    if (tasksLocalStorage) {
+      allTasks(JSON.parse(tasksLocalStorage))
+    }
+  }, [])
+
+  console.log(tasks, inputValue, filters)
   return (
     <StyledMain>
       <StyledContainerDiv>
         <Title text='Список дел' />
         <InputTask value={inputValue} changeValue={changeValue} addTask={addTask} />
-        <Filters />
-        <Tasks tasks={tasks} changeStatusTask={changeStatusTask} deleteTask={deleteTask} />
+        <Filters changeFilter={changeFilter} filters={filters} />
+        <Tasks filters={filters} tasks={tasks} changeStatusTask={changeStatusTask} deleteTask={deleteTask} changeTextTask={changeTextTask} />
       </StyledContainerDiv>
     </StyledMain>
   )

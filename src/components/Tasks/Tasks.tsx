@@ -1,7 +1,8 @@
 import React from 'react'
 import { CardTask } from './CardTask/CardTask'
 import styled from 'styled-components'
-import { TaskProps, TasksProps } from '../../state/cardTasks/types'
+import { TaskProps } from '../../state/cardTasks/types'
+import { ComponentTasksProps } from './types'
 
 const StyledTaskDiv = styled.div`
   display: flex;
@@ -11,11 +12,21 @@ const StyledTaskDiv = styled.div`
   gap: 20px;
 `
 
-export const Tasks: React.FC<TasksProps> = ({ tasks, changeStatusTask, deleteTask }) => {
+export const Tasks: React.FC<ComponentTasksProps> = ({ tasks, changeStatusTask, deleteTask, filters, changeTextTask }) => {
+  const filteredTasks = tasks.filter((task: TaskProps) => {
+    if (filters === 'All') {
+      return task
+    } else if (filters === 'Completed') {
+      return task.confirmed
+    } else if (filters === 'Uncompleted') {
+      return !task.confirmed
+    }
+  })
+
   return (
     <StyledTaskDiv>
-      {tasks.map((task: TaskProps) => (
-        <CardTask key={task.id} id={task.id} text={task.text} confirmed={task.confirmed} date={task.date} changeStatusTask={changeStatusTask} deleteTask={deleteTask} />
+      {filteredTasks.map((task: TaskProps) => (
+        <CardTask key={task.id} id={task.id} text={task.text} confirmed={task.confirmed} date={task.date} changeStatusTask={changeStatusTask} deleteTask={deleteTask} changeTextTask={changeTextTask} />
       ))}
     </StyledTaskDiv>
   )
